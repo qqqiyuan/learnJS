@@ -1,0 +1,16 @@
+{
+  "name": "learnJS",
+  "version": "1.0.0",
+  "description": "learn js",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "dn test && dn build -e prod"
+  },
+  "author": {
+    "name": "Houfeng",
+    "email": "admin@xhou.net",
+    "url": "http://houfeng.net"
+  },
+  "license": "MIT",
+  "devDependencies": {}
+}
