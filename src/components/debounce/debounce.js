@@ -1,17 +1,3 @@
-// function debounce(func, wait) {
-//   var timeout;
-//   return function() {
-//     // context 为了不影响原函数在执行过程中this的指向
-//     var context = this;
-//     // args 为了不影响函数在执行过程中event对象的值
-//     var args = arguments;
-//     clearTimeout(timeout);
-//     timeout = setTimeout(function() {
-//       func.apply(context, args);
-//     }, wait);
-//   };
-// }
-
 function debounce(func, wait, immediate) {
   var timeout, result;
   var debounced = function() {
@@ -42,7 +28,5 @@ function debounce(func, wait, immediate) {
 
   return debounced;
 }
-
-
 
 export default debounce;

@@ -1,20 +1,10 @@
-### 防抖
+## 防抖
 
-```javascript
-var count = 0;
-var app = document.getElementById('app');
-var button = document.getElementById('button');
+### 适用场景
 
-function setHtml(e) {
-  // console.log(this);
-  // console.log(e);
-  count++;
-  app.innerHTML = count;
-}
+主要应用于某些事件高频发的场景，比如scroll、click、mousemove等。
 
-// app.onmousemove = setHtml; // ==> this指向的是 <div id="app"></div>，e指向MouseEvent
+### 原理
 
-var setDebounce = debounce(setHtml, 5000, true);
-app.onmousemove = setDebounce; // ==> this指向的是 Window对象，e则为undefined
-button.onclick = setDebounce.cancel;
-```
+不管事件触发的频率怎么样，程序都在事件触发完n秒后才执行，如果在n秒之内事件被触发了多次，那将会以最新一次事件触发为准，n秒后才执行。总之，就是要等事件触发n秒后不再触发事件程序才会执行，否则会再以最新的事件触发为准等n秒，
+
