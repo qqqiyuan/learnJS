@@ -9,4 +9,9 @@ function setHtml(e) {
   app.innerHTML = count;
 }
 
-app.onmousemove = throttle(setHtml, 2000);
+app.onmousemove = throttle(setHtml, 3000);
+
+button.onclick = function() {
+  console.log(1);
+  throttle(setHtml, 3000).cancel();
+}
