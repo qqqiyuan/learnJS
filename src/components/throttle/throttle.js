@@ -72,8 +72,8 @@
   */
 
 /*
- * 添加取消节流功能
- */
+ * 添加节流取消功能
+ *
   function throttle(func, wait) {
     var context = this;
     var args = arguments;
@@ -103,14 +103,41 @@
       }
     };
 
-    // throttled.cancel = function () {
-    //   timer = null;
-    //   clearTimeout(timer);
-    //   last = 0;
-    // };
+    throttled.cancel = function () {
+      clearTimeout(timer);
+      timer = null;
+      last = 0;
+    };
 
     return throttled;
   }
+  */
+
+/*
+ * 添加头尾配置项
+ */
+
+function throttle(func, wait, options) {
+  var timer;
+  var last = 0;
+  var now;
+  var diff;
+  var leading;
+  var tailing;
+  var context;
+  var args;
+  if (options) {
+    options.leading && (leading = options.leading);
+    options.tailing && (tailing = options.tailing);
+  }
+
+  var later = function () {
+    last = leading === false ? 0 : new Date().getTime();
+    timer = null;
+    func.apply(func, wait);
+  };
+
+};
 
 
 export default throttle;
