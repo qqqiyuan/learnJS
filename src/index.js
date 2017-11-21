@@ -1,6 +1,6 @@
 import './assets/common.less';
 import './assets/index.less';
 
-import './components/uniqueArray/test.js';
+import './components/debounce/test.js';
 
 

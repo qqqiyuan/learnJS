@@ -13,6 +13,6 @@ function setHtml(e) {
 
 // app.onmousemove = setHtml; // ==> this指向的是 <div id="app"></div>，e指向MouseEvent
 
-var setDebounce = debounce(setHtml, 5000, true);
+var setDebounce = debounce(setHtml, 3000, true);
 app.onmousemove = setDebounce; // ==> this指向的是 Window对象，e则为undefined
 button.onclick = setDebounce.cancel;

@@ -39,7 +39,7 @@ function uniqueArray(arr) {
 ------------
 
 ```javascript
-// 排序后再去重
+// 排序后再去重，但是sort 排序的结果并不总是正确的
 function uniqueArray(arr) {
   arr = arr.sort();
   var resultArr = [arr[0]];
@@ -63,8 +63,8 @@ function uniqueArray(arr) {
   var resultArr = [];
   for (var i = 0; i < arr.length; i++) {
     var temp = arr[i];
-    if (!tempObj.hasOwnProperty(typeof temp + temp)) {
-      tempObj[(typeof temp + temp)] = arr[i];
+    if (!tempObj.hasOwnProperty(typeof temp + JSON.stringify(temp))) {
+      tempObj[(typeof temp + JSON.stringify(temp))] = arr[i];
     }
   }
   for (var o in tempObj) {
@@ -75,4 +75,8 @@ function uniqueArray(arr) {
 ```
 
 利用空的Object对象将数组转成键值对的方式，数组中元素的值作为Object的key值，在遍历数组的过程中，如果在Object中有对应的key值则忽略，否则将该元素的值做成Object的键值存进Object中，最后利用for-in循环，取出Object中包含的所有值。
-**注意** typeof temp是为了在Object中存key值时，区分string类型的 '1' 和 number类型的 1。
+
+**注意**
+- typeof temp是为了在Object中存key值时，区分string类型的 '1' 和 number类型的 1。
+- JSON.stringify 是为了在数组中如果遇到两个对象中的key值相同时 可以区分对象是否相等。
+
