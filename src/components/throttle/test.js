@@ -9,9 +9,8 @@ function setHtml(e) {
   app.innerHTML = count;
 }
 
-app.onmousemove = throttle(setHtml, 3000);
+app.onmousemove = throttle(setHtml, 3000, { leading: true, tailing: true });
 
 button.onclick = function() {
-  console.log(1);
-  throttle(setHtml, 3000).cancel();
+  throttle(setHtml, 3000, { leading: true, tailing: true }).cancel();
 }

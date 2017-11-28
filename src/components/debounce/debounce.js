@@ -29,7 +29,7 @@
 //   return debounced;
 // }
 
-function debounce(func, wait, immdediate) {
+function debounce(func, wait, immediate) {
   var context;
   var args;
   var timer;
@@ -40,7 +40,7 @@ function debounce(func, wait, immdediate) {
     if (timer) {
       clearTimeout(timer);
     }
-    if (immdediate) {
+    if (immediate) {
       // 如果已经执行过了timer为true,
       if (!timer) {
         func.apply(context, args);

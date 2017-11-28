@@ -121,21 +121,48 @@ function throttle(func, wait, options) {
   var timer;
   var last = 0;
   var now;
-  var diff;
-  var leading;
-  var tailing;
+  var leading = options.leading;
+  var tailing = options.tailing;
   var context;
   var args;
-  if (options) {
-    options.leading && (leading = options.leading);
-    options.tailing && (tailing = options.tailing);
-  }
 
-  var later = function () {
-    last = leading === false ? 0 : new Date().getTime();
-    timer = null;
-    func.apply(func, wait);
+  var throttled = function() {
+
+    var later = function() {
+      last = leading === false ? 0 : new Date().getTime();
+      timer = null;
+      func.apply(context, args);
+    };
+
+    context = this;
+    args = arguments;
+    now = new Date().getTime();
+    // last == 0 且 leading 为false,设置last=now,延迟执行
+    if (!last && leading === false) {
+      last = now;
+    }
+    var remaining = wait - (now - last);
+    // now - last > wait,间隔时间超过设置时间
+    if (remaining <= 0) {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      func.apply(context, args);
+      last = now;
+    } else if(!timer && tailing) {
+      // 需要等待remaining时间后才执行
+      timer = setTimeout(later, remaining);
+    }
   };
+
+  throttled.cancel = function() {
+    clearTimeout(timer);
+    last = 0;
+    timer = null;
+  };
+
+  return throttled;
 
 };
 
