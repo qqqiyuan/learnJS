@@ -1,0 +1,1 @@
+import componse from 'compose';
